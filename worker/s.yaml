@@ -1,0 +1,36 @@
+edition: 1.0.0
+name: hello-world-app
+access: "default"
+
+vars:
+  region: "cn-hangzhou"
+  service:
+    name: "serverless-cd"
+    description: 'serverless cd service'
+
+services:
+  helloworld:
+    component: fc
+    actions:
+      pre-deploy:
+        - component: fc build --use-docker --dockerfile ./code/Dockerfile # 要运行的组件，格式为【component: 组件名 命令 参数】（可以通过s cli registry search --type Component 获取组件列表）
+    #        - run: docker build xxx          # 要执行的系统命令，类似于一种钩子的形式
+    #          path: ./src                    # 执行系统命令/钩子的路径
+    #        - plugin: myplugin               # 与运行的插件 （可以通过s cli registry search --type Plugin 获取组件列表）
+    #          args:                          # 插件的参数信息
+    #            testKey: testValue
+    #      post-deploy: # 在deploy之后运行
+    #        - component: fc versions publish # 要运行的命令行
+    props:
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: "custom-nodejs14-event-function"
+        description: 'hello world by serverless devs'
+        caPort: 9000
+        memorySize: 256
+        timeout: 60
+        runtime: custom-container
+        customContainerConfig:
+          image: "https://cr.console.aliyun.com/a.acr"
+        codeUri: ./code
