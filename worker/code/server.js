@@ -9,7 +9,7 @@ const app = express();
 app.use(express.raw());
 
 app.post('/hook', (req, res) => {
-  
+  await core.step();
   res.send('OK');
 });
 
