@@ -10,13 +10,9 @@ job:
     FIRST_NAME: Mona
     LAST_NAME: Octocat
   steps:
-    # - uses: actions/checkout@v2
-    #   with:
-    #     fetch-depth: 0
-
     - run: |
         npm install
-      working-directory: ./temp
+      working-directory: ./
     - run: |
         npm --version
-      working-directory: ./temp
+      working-directory: ./

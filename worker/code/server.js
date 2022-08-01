@@ -1,16 +1,19 @@
-'use strict';
+"use strict";
 
 const PORT = 9000;
-const HOST = '0.0.0.0';
-const REQUEST_ID_HEADER = 'x-fc-request-id'
+const HOST = "0.0.0.0";
+const REQUEST_ID_HEADER = "x-fc-request-id";
 
-const express = require('express');
+const express = require("express");
 const app = express();
 app.use(express.raw());
 
-app.post('/hook', (req, res) => {
-  await core.step();
-  res.send('OK');
+app.get("/", async (req, res) => {
+  res.send("index");
+});
+
+app.post("/hook", async (req, res) => {
+  res.send("OK");
 });
 
 var server = app.listen(PORT, HOST);
