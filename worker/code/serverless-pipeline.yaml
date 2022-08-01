@@ -10,6 +10,7 @@ job:
     FIRST_NAME: Mona
     LAST_NAME: Octocat
   steps:
+    - uses: serverless-cd/checkout
     - run: |
         npm install
       working-directory: ./
