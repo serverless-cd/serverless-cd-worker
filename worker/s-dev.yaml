@@ -1,0 +1,40 @@
+# ------------------------------------
+edition: 1.0.0
+name: web-framework-app
+access: "default"
+
+vars: # 全局变量
+  region: "cn-hangzhou"
+  service:
+    name: "web-framework-3hlw"
+    description: 'Serverless Devs Web Framework Service'
+
+services:
+  framework:
+    component: fc
+    actions:
+      pre-deploy:
+        - run: npm install --production
+          path: ./code
+    props:
+      region: ${vars.region}
+      service: ${vars.service}
+      function:
+        name: "express"
+        description: 'Serverless Devs Web Framework Function'
+        codeUri: './code'
+        runtime: custom
+        timeout: 60
+        caPort: 9000
+      triggers:
+        - name: httpTrigger
+          type: http
+          config:
+            authType: anonymous
+            methods:
+              - GET
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: '/*'
