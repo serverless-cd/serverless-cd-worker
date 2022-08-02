@@ -12,7 +12,11 @@ app.get("/", async (req, res) => {
   res.send("index");
 });
 
-app.post("/hook", async (req, res) => {
+// webhook触发
+// 1. on push master/ on tag
+// 2. export someting env
+
+app.post("/send", async (req, res) => {
   res.send("OK");
 });
 
