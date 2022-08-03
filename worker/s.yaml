@@ -18,7 +18,7 @@ services:
       region: ${vars.region}
       service: ${vars.service}
       function:
-        name: "custom-nodejs14-event-function"
+        name: "worker"
         description: 'hello world by serverless devs'
         caPort: 9000
         memorySize: 256

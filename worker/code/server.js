@@ -17,6 +17,7 @@ app.get("/", async (req, res) => {
 // 2. export someting env
 
 app.post("/send", async (req, res) => {
+  
   res.send("OK");
 });
 
