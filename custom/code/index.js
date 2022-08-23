@@ -1,6 +1,8 @@
 const express = require("express");
 const simpleGit = require("simple-git");
 const fs = require("fs");
+const core = require("@serverless-cd/core");
+const Engine = require("@serverless-cd/engine").default;
 const app = express();
 
 app.get("/message", async (req, res) => {
@@ -32,9 +34,11 @@ app.get("/message", async (req, res) => {
   fs.unlinkSync(".git/info/sparse-checkout");
   console.log("Removing sparse-checkout done");
   // 2. serverlesss-cd/core parseSpec
+  const { steps } = core.parseSpec();
   // 3. serverlesss-cd/engine engine.start()
-
-  res.send(`Hello`);
+  const engine = new Engine(steps);
+  const result = await engine.start();
+  res.send(JSON.stringify(result));
 });
 
 app
