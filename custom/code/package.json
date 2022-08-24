@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "@serverless-cd/core": "^0.0.1-alpha.6",
+    "@serverless-cd/engine": "^0.0.1-alpha.6",
+    "express": "^4.17.1",
+    "simple-git": "^3.13.0"
   }
 }
