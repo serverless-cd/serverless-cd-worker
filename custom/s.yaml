@@ -1,39 +1,42 @@
 edition: 1.0.0
 name: web-framework-app
-access: "default"
+access: "dankun"
 
 vars:
-  region: "cn-hangzhou"
+  region: "cn-beijing"
   service:
-    name: "serverless-cd"
+    name: "serverless-worker"
     description: "Serverless Devs Web Framework Service"
+    logConfig: auto
+    # nasConfig: auto
+  functionName: "worker-custom"
 
 services:
   framework:
     component: fc
     actions:
-      pre-deploy:
-        - run: npm install --production
-          path: ./code
+      post-deploy:
+        - component: fc api UpdateFunction --region ${vars.region} --header
+            '{"x-fc-disable-container-reuse":"True"}' --path
+            '{"serviceName":"${vars.service.name}","functionName":"${vars.functionName}"}'
     props:
       region: ${vars.region}
       service: ${vars.service}
       function:
-        name: "custom"
+        name: ${vars.functionName}
         description: "Serverless Devs Web Framework Function"
         codeUri: "./code"
-        runtime: custom
-        timeout: 60
-        caPort: 9000
-      triggers:
-        - name: httpTrigger
-          type: http
-          config:
-            authType: anonymous
-            methods:
-              - GET
-      customDomains:
-        - domainName: auto
-          protocol: HTTP
-          routeConfigs:
-            - path: "/*"
+        runtime: nodejs14
+        timeout: 600
+        handler: src/index.handler
+        asyncConfiguration:
+          maxAsyncEventAgeInSeconds: 456
+          maxAsyncRetryAttempts: 0
+          statefulInvocation: true
+        # instanceLifecycleConfig:      # 扩展函数
+        #   preFreeze:                  # PreFreeze 函数
+        #     handler: index.preFreeze        # 函数入口
+        #     timeout: 60               # 超时时间
+        #   preStop:                    # PreStop 函数
+        #     handler: index.preFreeze        # 函数入口
+        #     timeout: 60               # 超时时间

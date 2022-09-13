@@ -2,3 +2,4 @@ node_modules
 docker-demo
 my-project
 .s
+.env

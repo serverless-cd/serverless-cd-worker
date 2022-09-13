@@ -9,9 +9,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@serverless-cd/core": "^0.0.1-alpha.6",
-    "@serverless-cd/engine": "^0.0.1-alpha.6",
-    "express": "^4.17.1",
-    "simple-git": "^3.13.0"
+    "@serverless-cd/core": "^0.0.1-alpha.9",
+    "@serverless-cd/engine": "^0.0.1-alpha.10",
+    "dotenv": "^16.0.2",
+    "lodash": "^4.17.21",
+    "simple-git": "^3.13.0",
+    "tablestore": "^5.2.2",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "fs-extra": "^10.1.0"
   }
 }
