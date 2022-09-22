@@ -3,9 +3,9 @@ name: web-framework-app
 access: "dankun"
 
 vars:
-  region: "cn-beijing"
+  region: "ap-southeast-1"
   service:
-    name: "serverless-worker"
+    name: "serverless-cd"
     description: "Serverless Devs Web Framework Service"
     logConfig: auto
     # nasConfig: auto

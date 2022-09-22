@@ -3,3 +3,4 @@ docker-demo
 my-project
 .s
 .env
+.DS_Store
