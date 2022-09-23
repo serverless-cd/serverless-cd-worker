@@ -1,7 +1,7 @@
 const Orm = require('../ots/orm');
-const { TABLE_NAME, INDEX_NAME } = require('./constant');
+const { OTS_TASK } = require('../constants');
 
-const orm = new Orm(TABLE_NAME, INDEX_NAME);
+const orm = new Orm(OTS_TASK.name, OTS_TASK.index);
 
 // 查询单个TASK数据
 async function findOne(userId, appName, taskId) {
